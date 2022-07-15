@@ -16,12 +16,6 @@ st.title('Recommend me some movie!')
 
 st.markdown('You like to know movies similar to flicks you like? Then select your favorite movie here and the number of other movies you are interested in:')
 
-col_one_list = movies['title'].tolist()
-title_ = st.selectbox('Select a movie you like:', col_one_list)
-
-number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
-#st.write("I'm ", age, 'years old')
-
 # 1. Popularity-based
 def pop_movies(number):
     ratings_new = pd.DataFrame(ratings.groupby('movieId')['rating'].mean())
@@ -83,8 +77,15 @@ with st.sidebar:
     )
 
 if add_radio == "Popularity-based":
+    number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
     pop_movies(number)
 elif add_radio == "Item-based":
-	item_movies(title_, number)
+    col_one_list = movies['title'].tolist()
+    title_ = st.selectbox('Select a movie you like:', col_one_list)
+    number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
+    item_movies(title_, number)
 elif add_radio == "User-based":
+    col_one_list = rating['userId'].tolist()
+    title_ = st.selectbox('Select a userID:', col_one_list)
+    number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
     user_recom(user_id, n)
