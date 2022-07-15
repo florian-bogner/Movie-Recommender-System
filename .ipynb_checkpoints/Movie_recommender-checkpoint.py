@@ -53,7 +53,7 @@ def item_movies(title_, number):
     st.dataframe(top_number_with_titles['title'].to_list())
     
 # 3. User-based
-def user_recom(user_id, n):
+def user_recom(user_id, number):
     movie_titles = movies[['movieId', 'title']]
     users_items = pd.pivot_table(data=ratings, 
                                  values='rating', 
@@ -67,7 +67,7 @@ def user_recom(user_id, n):
     not_visited_restaurants = users_items.loc[users_items.index!=user_id, users_items.loc[user_id,:]==0]
     weighted_averages = pd.DataFrame(not_visited_restaurants.T.dot(weights), columns=["predicted_rating"])
     recommendations = weighted_averages.merge(movie_titles, left_index=True, right_on="movieId")
-    st.dataframe(recommendations.sort_values("predicted_rating", ascending=False).head(n)['title'].to_list())
+    st.dataframe(recommendations.sort_values("predicted_rating", ascending=False).head(number)['title'].to_list())
 
 # Using "with" notation
 with st.sidebar:
@@ -86,6 +86,6 @@ elif add_radio == "Item-based":
     item_movies(title_, number)
 elif add_radio == "User-based":
     col_one_list = ratings['userId'].tolist()
-    user_id = st.text_input('Enter a userID in this format :')
+    user_id = st.number_input('Enter a userID in this format :', value=1)
     number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
     user_recom(user_id, number)
