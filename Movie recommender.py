@@ -2,6 +2,7 @@
 
 import streamlit as st
 import pandas as pd
+import sklearn
 
 from sklearn.preprocessing import RobustScaler, StandardScaler, MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
