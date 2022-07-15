@@ -86,6 +86,6 @@ elif add_radio == "Item-based":
     item_movies(title_, number)
 elif add_radio == "User-based":
     col_one_list = ratings['userId'].tolist()
-    user_id = st.selectbox('Select a userID:', col_one_list)
+    user_id = st.text_input('Enter a userID in this format :')
     number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
     user_recom(user_id, number)
