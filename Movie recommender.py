@@ -6,10 +6,10 @@ import pandas as pd
 from sklearn.preprocessing import RobustScaler, StandardScaler, MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
 
-movies = pd.read_csv('../ml-latest-small/movies.csv')
-ratings = pd.read_csv('../ml-latest-small/ratings.csv')
-links = pd.read_csv('../ml-latest-small/links.csv')
-tags = pd.read_csv('../ml-latest-small/tags.csv')
+movies = pd.read_csv('data/movies.csv')
+ratings = pd.read_csv('data/ml-latest-small/ratings.csv')
+links = pd.read_csv('data/ml-latest-small/links.csv')
+tags = pd.read_csv('data/ml-latest-small/tags.csv')
 
 st.title('Recommend me some movie!')
 
