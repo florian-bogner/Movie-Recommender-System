@@ -12,7 +12,7 @@ ratings = pd.read_csv('data/ratings.csv')
 links = pd.read_csv('data/links.csv')
 tags = pd.read_csv('data/tags.csv')
 
-st.title('Recommend me some movie!')
+st.title('Recommend me some movies!')
 
 st.markdown('You like to know movies similar to flicks you like? Then select your favorite movie here and the number of other movies you are interested in:')
 
