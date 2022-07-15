@@ -65,7 +65,7 @@ def user_recom(user_id, number):
     not_visited_restaurants = users_items.loc[users_items.index!=user_id, users_items.loc[user_id,:]==0]
     weighted_averages = pd.DataFrame(not_visited_restaurants.T.dot(weights), columns=["predicted_rating"])
     recommendations = weighted_averages.merge(movie_titles, left_index=True, right_on="movieId")
-    st.dataframe(recommendations.sort_values("predicted_rating", ascending=False).head(number)['title'].to_list())
+    st.dataframe(recommendations.sort_values("predicted_rating", ascending=False).head(number)['title'].to_list(), width = 1000)
 
 # Using "with" notation
 with st.sidebar:
