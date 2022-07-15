@@ -86,5 +86,5 @@ if add_radio == "Popularity-based":
     pop_movies(number)
 elif add_radio == "Item-based":
 	item_movies(title_, number)
-else add_radio == "User-based":
+elif add_radio == "User-based":
     user_recom(user_id, n)
