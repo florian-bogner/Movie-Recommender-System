@@ -12,8 +12,6 @@ tags = pd.read_csv('data/tags.csv')
 
 st.title('Recommend me some movies!')
 
-st.markdown('You like to know movies similar to flicks you like? Then select your favorite movie here and the number of other movies you are interested in:')
-
 # 1. Popularity-based
 def pop_movies(number):
     ratings_new = pd.DataFrame(ratings.groupby('movieId')['rating'].mean())
@@ -65,7 +63,7 @@ def user_recom(user_id, number):
     not_visited_restaurants = users_items.loc[users_items.index!=user_id, users_items.loc[user_id,:]==0]
     weighted_averages = pd.DataFrame(not_visited_restaurants.T.dot(weights), columns=["predicted_rating"])
     recommendations = weighted_averages.merge(movie_titles, left_index=True, right_on="movieId")
-    st.dataframe(recommendations.sort_values("predicted_rating", ascending=False).head(number)['title'].to_list(), width = 1000)
+    st.dataframe(recommendations.sort_values("predicted_rating", ascending=False).head(number)['title'].to_list())
 
 # Using "with" notation
 with st.sidebar:
@@ -75,14 +73,17 @@ with st.sidebar:
     )
 
 if add_radio == "Popularity-based":
+    st.markdown('You like to know some popular movies? Then use the slider to select the number of movies you want recommended:')
     number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
     pop_movies(number)
 elif add_radio == "Item-based":
+    st.markdown('You like to know movies similar to flicks you like? Then select your favorite movie here and the number of movies you want recommended:')
     col_one_list = movies['title'].tolist()
     title_ = st.selectbox('Select a movie you like:', col_one_list)
     number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
     item_movies(title_, number)
 elif add_radio == "User-based":
+    st.markdown('You like to know movies similar to those other users like? Then select a user and the number of movies you want recommended:')
     col_one_list = ratings['userId'].tolist()
     user_id = st.number_input('Enter a userID in this format :', value=1, min_value=1, max_value=ratings['userId'].max())
     number = st.slider('Select the number of movies you want to be displayed:', 1, 100)
